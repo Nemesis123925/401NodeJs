@@ -1,4 +1,4 @@
-var mysql = require("mysql");
+var mysql = require("src/Mappers/mysql");
 
 var connection = mysql.createConnection({
     host     : 'localhost',
