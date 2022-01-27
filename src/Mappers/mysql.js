@@ -1,15 +1,17 @@
-var mysql = require("src/Mappers/mysql");
+let mysql = require('mysql');
 
-var connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : 'root',
-    database : '401Resolve'
-});
+let connection = mysql.createConnection({
+    host    : 'localhost',
+    user    : 'root',
+    password: 'root',
+    database: '401teamresolve'
+})
 
 connection.connect();
 
-connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+let query = "SELECT * FROM adminusers"
+
+connection.query(query, function (error, results, fields) {
     if (error) throw error;
-    console.log('The solution is: ', results[0].solution);
+    console.log('The solution is: ', results);
 });
