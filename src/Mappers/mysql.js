@@ -8,11 +8,13 @@ let sql = ""
 
 function addUser(res, username, password){
     sql = insert + username + "', '" + password + "')"
-    connection.query(sql, function(error, results, fields){
+    connection.query(sql, function(error, results, fields) {
+        // Potential Bug:
+        // We can have multiple accounts use the same username
         if (error && error.code === 'ER_DUP_ENTRY') {
             console.log("Duplicated")
             res.end("Duplicated")
-        }else{
+        } else {
             console.log(results);
             res.end("success")
         }
@@ -27,7 +29,7 @@ function checkUser(res, username, password){
             throw error
             /*console.log("Duplicated")
             res.end("Duplicated")*/
-        }else if(!results.length) {
+        } else if(!results.length) {
             res.end("fail, wrong username")
         }else{
             results = JSON.parse(JSON.stringify(results))
